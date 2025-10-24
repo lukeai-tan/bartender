@@ -1,0 +1,46 @@
+# ---- Python ----
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+*.egg
+*.egg-info/
+.eggs/
+.Python
+venv/
+env/
+ENV/
+*.log
+*.cache
+
+# ---- Environment Variables ----
+.env
+
+# ---- IDE / Editor files ----
+.vscode/
+.idea/
+*.swp
+
+# ---- Tests & Coverage ----
+.coverage
+htmlcov/
+.tox/
+.pytest_cache/
+
+# ---- Docker ----
+# You normally keep Dockerfile, but ignore build artifacts
+*.pid
+*.tar
+*.log
+
+# ---- OS Files ----
+.DS_Store
+Thumbs.db
+
+# ---- Jupyter Notebooks ----
+.ipynb_checkpoints/
+
+# ---- Temporary files ----
+*.tmp
+*.bak
