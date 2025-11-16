@@ -1,18 +1,22 @@
-from dotenv import load_dotenv
-import os
-import spotipy
-from spotipy.oauth2 import SpotifyClientCredentials
+from utils.spotipy_utils import search_track, print_current_playing, print_track_info
+from utils.rapidapi_utils import print_audio_features
 
-load_dotenv()
+# Edit these
 
-sp = spotipy.Spotify(auth_manager=SpotifyClientCredentials(
-    client_id=os.getenv("SPOTIPY_CLIENT_ID"),
-    client_secret=os.getenv("SPOTIPY_CLIENT_SECRET")
-))
+def query_song(track_name, artist_name):
+    track_name = "Blinding Lights"
+    artist_name = "The Weeknd"
 
-# Example track (try a very popular track)
-track_id = "3AiD7F0YjA5H5c3e41yr7D"  # "Blinding Lights" global release ID
+    query = f"track:{track_name} artist:{artist_name}"
 
-# Fetch audio features
-features = sp.audio_features([track_id])[0]
-print(features)
+    track_info = search_track(track_name, artist_name)
+
+    if track_info is None:
+        print("Track not found")
+
+    else:
+        print_track_info(track_info)
+        print_audio_features(track_name, artist_name)
+
+
+print_current_playing()
