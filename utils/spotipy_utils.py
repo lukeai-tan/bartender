@@ -51,6 +51,9 @@ def print_track_info(track_info):
     print(f"Spotify URL: {track_info['external_url']}")
 
 
+'''
+Methods to get account specific data
+'''
 
 def get_current_playing():
     sp = create_sp("user-read-currently-playing user-read-playback-state")
@@ -75,6 +78,7 @@ def get_current_playing():
     }
     return info
 
+
 def print_current_playing():
     info = get_current_playing()
 
@@ -93,9 +97,75 @@ def print_current_playing():
     print(f"  Playing: {info['is_playing']}")
     print(f"  Progress:  {progress} / {duration}")
 
-
 def ms_to_min_sec(ms):
     seconds = ms // 1000
     minutes = seconds // 60
     seconds = seconds % 60
     return f"{minutes}:{seconds:02d}"
+
+
+def pause_playback():
+    sp = create_sp("user-modify-playback-state user-read-playback-state")
+    try:
+        sp.pause_playback()
+        print("⏸️ Playback paused.")
+    except Exception as e:
+        print("Error pausing playback:", e)
+
+
+def resume_playback():
+    sp = create_sp("user-modify-playback-state user-read-playback-state")
+    try:
+        sp.start_playback()
+        print("▶️ Playback resumed.")
+    except Exception as e:
+        print("Error resuming playback:", e)
+
+
+def next_track():
+    sp = create_sp("user-modify-playback-state user-read-playback-state")
+    try:
+        sp.next_track()
+        print("⏭️ Skipped to next track.")
+    except Exception as e:
+        print("Error skipping track:", e)
+
+
+def previous_track():
+    sp = create_sp("user-modify-playback-state user-read-playback-state")
+    try:
+        sp.previous_track()
+        print("⏮️ Went to previous track.")
+    except Exception as e:
+        print("Error going to previous track:", e)
+
+
+def play_track_in_playlist(playlist_id, track_id):
+    sp = create_sp("user-modify-playback-state user-read-playback-state")
+    sp.start_playback(
+        context_uri=f"spotify:playlist:{playlist_id}",
+        offset={"uri": f"spotify:track:{track_id}"}
+    )
+    print("Now playing track:", track_id)
+
+
+def get_current_playlist():
+    sp = create_sp("user-read-playback-state")
+    current = sp.current_user_playing_track()
+    if not current:
+        return None
+
+    context = current.get("context")
+    if context and context["type"] == "playlist":
+        playlist_uri = context["uri"]
+        playlist = sp.playlist(playlist_uri)
+        return playlist["name"]
+    return None
+
+
+def print_current_playlist():
+    playlist_name = get_current_playlist()
+    if playlist_name:
+        print(f"🎶 Current Playlist: {playlist_name}")
+    else:
+        print("🎵 Not playing from a playlist.")
