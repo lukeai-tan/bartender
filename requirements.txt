@@ -1,2 +1,5 @@
 python-dotenv
 spotipy
+qrcode[pil]
+pyzbar
+Pillow

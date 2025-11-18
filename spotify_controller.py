@@ -24,7 +24,8 @@ def controller():
         "pause": ("Pause ⏸️", pause_playback),
         "resume": ("Resume ▶️", resume_playback),
         "song": ("Show Current Track", print_current_playing),
-        "playlist": ("Show Current Playlist", print_current_playlist),
+        "pli": ("Show Current Playlist Info", print_current_playlist_info),
+        "pls": ("Show Current Playlist Songs", print_current_playlist_tracks_data),
         "q": ("Quit", None)
     }
 
@@ -48,4 +49,5 @@ def controller():
         else:
             print("Invalid choice, try again.")
 
-controller()
+if __name__ == "__main__":
+    controller()
