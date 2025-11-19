@@ -3,3 +3,5 @@ spotipy
 qrcode[pil]
 pyzbar
 Pillow
+mkdocs
+mkdocs-material
