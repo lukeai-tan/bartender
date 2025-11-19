@@ -1,0 +1,1292 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="..">
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.0">
+    
+    
+      
+        <title>Spotify Utils - Bartender Docs</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.618322db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#spotify-utils" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Bartender Docs" class="md-header__button md-logo" aria-label="Bartender Docs" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Bartender Docs
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Spotify Utils
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Bartender Docs" class="md-nav__button md-logo" aria-label="Bartender Docs" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Bartender Docs
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Reference
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    API Reference
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Spotify Utils
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Spotify Utils
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configuration
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#authentication" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Authentication
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Authentication">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#create_sp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        create_sp()
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#track-search" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Track Search
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Track Search">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#search_tracktrack_name-artist_namenone-limit1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        search_track(track_name, artist_name=None, limit=1)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#playback-control" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Playback Control
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Playback Control">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pause_playback" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        pause_playback()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#resume_playback" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        resume_playback()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#next_track" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        next_track()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#previous_track" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        previous_track()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#play_track_in_playlistplaylist_id-track_id" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        play_track_in_playlist(playlist_id, track_id)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#currently-playing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Currently Playing
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Currently Playing">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#get_current_playing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        get_current_playing()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#print_current_playing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        print_current_playing()
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#time-formatting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Time Formatting
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Time Formatting">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ms_to_min_secms" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ms_to_min_sec(ms)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#playlist-information" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Playlist Information
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Playlist Information">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#get_current_playlist_id" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        get_current_playlist_id()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get_current_playlist" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        get_current_playlist()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#print_current_playlist_name" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        print_current_playlist_name()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get_current_playlist_info" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        get_current_playlist_info()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#print_current_playlist_info" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        print_current_playlist_info()
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#playlist-tracks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Playlist Tracks
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Playlist Tracks">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#get_playlist_tracksplaylist_id" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        get_playlist_tracks(playlist_id)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#print_playlist_tracks_dataplaylist_id" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        print_playlist_tracks_data(playlist_id)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#print_current_playlist_tracks_data" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        print_current_playlist_tracks_data()
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configuration
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#authentication" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Authentication
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Authentication">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#create_sp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        create_sp()
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#track-search" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Track Search
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Track Search">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#search_tracktrack_name-artist_namenone-limit1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        search_track(track_name, artist_name=None, limit=1)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#playback-control" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Playback Control
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Playback Control">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pause_playback" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        pause_playback()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#resume_playback" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        resume_playback()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#next_track" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        next_track()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#previous_track" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        previous_track()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#play_track_in_playlistplaylist_id-track_id" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        play_track_in_playlist(playlist_id, track_id)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#currently-playing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Currently Playing
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Currently Playing">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#get_current_playing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        get_current_playing()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#print_current_playing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        print_current_playing()
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#time-formatting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Time Formatting
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Time Formatting">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ms_to_min_secms" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ms_to_min_sec(ms)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#playlist-information" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Playlist Information
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Playlist Information">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#get_current_playlist_id" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        get_current_playlist_id()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get_current_playlist" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        get_current_playlist()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#print_current_playlist_name" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        print_current_playlist_name()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get_current_playlist_info" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        get_current_playlist_info()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#print_current_playlist_info" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        print_current_playlist_info()
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#playlist-tracks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Playlist Tracks
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Playlist Tracks">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#get_playlist_tracksplaylist_id" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        get_playlist_tracks(playlist_id)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#print_playlist_tracks_dataplaylist_id" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        print_playlist_tracks_data(playlist_id)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#print_current_playlist_tracks_data" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        print_current_playlist_tracks_data()
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="spotify-utils">Spotify Utils<a class="headerlink" href="#spotify-utils" title="Permanent link">&para;</a></h1>
+<p>Utility functions for interacting with the Spotify Web API using the Spotipy library.<br />
+These helpers allow you to control playback, fetch currently playing information, inspect playlist data, and search tracks.</p>
+<hr />
+<h2 id="configuration">Configuration<a class="headerlink" href="#configuration" title="Permanent link">&para;</a></h2>
+<p>The module loads Spotify credentials from environment variables:</p>
+<ul>
+<li><code>SPOTIPY_CLIENT_ID</code></li>
+<li><code>SPOTIPY_CLIENT_SECRET</code></li>
+<li><code>SPOTIPY_REDIRECT_URI</code></li>
+</ul>
+<p>All functions use full permissions defined in <code>ALL_SCOPES</code>.</p>
+<hr />
+<h2 id="authentication">Authentication<a class="headerlink" href="#authentication" title="Permanent link">&para;</a></h2>
+<h3 id="create_sp"><code>create_sp()</code><a class="headerlink" href="#create_sp" title="Permanent link">&para;</a></h3>
+<p>Creates and returns an authenticated Spotipy client using OAuth.</p>
+<p><strong>Scopes included:</strong></p>
+<ul>
+<li>user-read-currently-playing  </li>
+<li>user-read-playback-state  </li>
+<li>user-modify-playback-state  </li>
+<li>user-library-read  </li>
+<li>user-top-read  </li>
+<li>playlist-read-private  </li>
+</ul>
+<hr />
+<h2 id="track-search">Track Search<a class="headerlink" href="#track-search" title="Permanent link">&para;</a></h2>
+<h3 id="search_tracktrack_name-artist_namenone-limit1"><code>search_track(track_name, artist_name=None, limit=1)</code><a class="headerlink" href="#search_tracktrack_name-artist_namenone-limit1" title="Permanent link">&para;</a></h3>
+<p>Searches Spotify for a track by name and (optionally) artist.</p>
+<p><strong>Returns:</strong><br />
+A dictionary with:</p>
+<ul>
+<li><code>id</code></li>
+<li><code>name</code></li>
+<li><code>artists</code></li>
+<li><code>album</code></li>
+<li><code>release_date</code></li>
+<li><code>popularity</code></li>
+<li><code>external_url</code></li>
+</ul>
+<p>Or <code>None</code> if no match.</p>
+<hr />
+<h2 id="playback-control">Playback Control<a class="headerlink" href="#playback-control" title="Permanent link">&para;</a></h2>
+<h3 id="pause_playback"><code>pause_playback()</code><a class="headerlink" href="#pause_playback" title="Permanent link">&para;</a></h3>
+<p>Pauses the current Spotify playback.</p>
+<h3 id="resume_playback"><code>resume_playback()</code><a class="headerlink" href="#resume_playback" title="Permanent link">&para;</a></h3>
+<p>Resumes playback on the active device.</p>
+<h3 id="next_track"><code>next_track()</code><a class="headerlink" href="#next_track" title="Permanent link">&para;</a></h3>
+<p>Skips to the next track.</p>
+<h3 id="previous_track"><code>previous_track()</code><a class="headerlink" href="#previous_track" title="Permanent link">&para;</a></h3>
+<p>Goes back to the previous track.</p>
+<h3 id="play_track_in_playlistplaylist_id-track_id"><code>play_track_in_playlist(playlist_id, track_id)</code><a class="headerlink" href="#play_track_in_playlistplaylist_id-track_id" title="Permanent link">&para;</a></h3>
+<p>Starts playing a specific track from a playlist.</p>
+<hr />
+<h2 id="currently-playing">Currently Playing<a class="headerlink" href="#currently-playing" title="Permanent link">&para;</a></h2>
+<h3 id="get_current_playing"><code>get_current_playing()</code><a class="headerlink" href="#get_current_playing" title="Permanent link">&para;</a></h3>
+<p>Returns metadata about the currently playing track.</p>
+<p>Fields include:</p>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>Track ID</td>
+</tr>
+<tr>
+<td>name</td>
+<td>Track name</td>
+</tr>
+<tr>
+<td>artists</td>
+<td>Artist names</td>
+</tr>
+<tr>
+<td>album</td>
+<td>Album name</td>
+</tr>
+<tr>
+<td>release_date</td>
+<td>Album release date</td>
+</tr>
+<tr>
+<td>popularity</td>
+<td>Spotify popularity (0–100)</td>
+</tr>
+<tr>
+<td>external_url</td>
+<td>Spotify link</td>
+</tr>
+<tr>
+<td>is_playing</td>
+<td>Whether playback is active</td>
+</tr>
+<tr>
+<td>progress_ms</td>
+<td>Current position</td>
+</tr>
+<tr>
+<td>duration_ms</td>
+<td>Track duration</td>
+</tr>
+</tbody>
+</table>
+<h3 id="print_current_playing"><code>print_current_playing()</code><a class="headerlink" href="#print_current_playing" title="Permanent link">&para;</a></h3>
+<p>Pretty-prints the currently playing song with timecodes.</p>
+<hr />
+<h2 id="time-formatting">Time Formatting<a class="headerlink" href="#time-formatting" title="Permanent link">&para;</a></h2>
+<h3 id="ms_to_min_secms"><code>ms_to_min_sec(ms)</code><a class="headerlink" href="#ms_to_min_secms" title="Permanent link">&para;</a></h3>
+<p>Converts milliseconds → <code>minutes:seconds</code>.</p>
+<hr />
+<h2 id="playlist-information">Playlist Information<a class="headerlink" href="#playlist-information" title="Permanent link">&para;</a></h2>
+<h3 id="get_current_playlist_id"><code>get_current_playlist_id()</code><a class="headerlink" href="#get_current_playlist_id" title="Permanent link">&para;</a></h3>
+<p>Returns the playlist ID of the playlist currently being played, or <code>None</code>.</p>
+<h3 id="get_current_playlist"><code>get_current_playlist()</code><a class="headerlink" href="#get_current_playlist" title="Permanent link">&para;</a></h3>
+<p>Returns the name of the current playlist (if playing from a playlist).</p>
+<h3 id="print_current_playlist_name"><code>print_current_playlist_name()</code><a class="headerlink" href="#print_current_playlist_name" title="Permanent link">&para;</a></h3>
+<p>Prints the name of the current playlist.</p>
+<h3 id="get_current_playlist_info"><code>get_current_playlist_info()</code><a class="headerlink" href="#get_current_playlist_info" title="Permanent link">&para;</a></h3>
+<p>Returns a dictionary containing:</p>
+<ul>
+<li><code>id</code></li>
+<li><code>name</code></li>
+<li><code>owner</code></li>
+<li><code>url</code></li>
+<li><code>tracks</code> (number of tracks)</li>
+</ul>
+<h3 id="print_current_playlist_info"><code>print_current_playlist_info()</code><a class="headerlink" href="#print_current_playlist_info" title="Permanent link">&para;</a></h3>
+<p>Prints formatted playlist metadata.</p>
+<hr />
+<h2 id="playlist-tracks">Playlist Tracks<a class="headerlink" href="#playlist-tracks" title="Permanent link">&para;</a></h2>
+<h3 id="get_playlist_tracksplaylist_id"><code>get_playlist_tracks(playlist_id)</code><a class="headerlink" href="#get_playlist_tracksplaylist_id" title="Permanent link">&para;</a></h3>
+<p>Fetches <strong>every track</strong> in a playlist (handling pagination).</p>
+<p>Returns a list of dictionaries:</p>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>Track ID</td>
+</tr>
+<tr>
+<td>name</td>
+<td>Track name</td>
+</tr>
+<tr>
+<td>artists</td>
+<td>Artists</td>
+</tr>
+<tr>
+<td>album</td>
+<td>Album name</td>
+</tr>
+<tr>
+<td>release_date</td>
+<td>Release date</td>
+</tr>
+<tr>
+<td>duration_ms</td>
+<td>Duration in milliseconds</td>
+</tr>
+<tr>
+<td>popularity</td>
+<td>Popularity score</td>
+</tr>
+<tr>
+<td>url</td>
+<td>Spotify track link</td>
+</tr>
+</tbody>
+</table>
+<h3 id="print_playlist_tracks_dataplaylist_id"><code>print_playlist_tracks_data(playlist_id)</code><a class="headerlink" href="#print_playlist_tracks_dataplaylist_id" title="Permanent link">&para;</a></h3>
+<p>Prints all tracks in the playlist with index, name, artists, and duration.</p>
+<h3 id="print_current_playlist_tracks_data"><code>print_current_playlist_tracks_data()</code><a class="headerlink" href="#print_current_playlist_tracks_data" title="Permanent link">&para;</a></h3>
+<p>Prints track data for whichever playlist is currently playing.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.instant", "navigation.sections", "navigation.expand", "content.code.copy"], "search": "../assets/javascripts/workers/search.7a47a382.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.e71a0d61.min.js"></script>
+      
+    
+  </body>
+</html>
