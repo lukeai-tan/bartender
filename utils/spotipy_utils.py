@@ -17,6 +17,8 @@ ALL_SCOPES = (
     "user-library-read "
     "user-top-read "
     "playlist-read-private "
+    "playlist-modify-private "
+    "playlist-modify-public "
 )
 
 
@@ -28,6 +30,20 @@ def create_sp():
         scope=ALL_SCOPES,
     )
     return spotipy.Spotify(auth_manager=auth)
+
+
+SAFE_MODE = True
+
+def allow_changes():
+    global SAFE_MODE
+    SAFE_MODE = False
+    print("⚠️ SAFE MODE OFF - Playlist modifications allowed.")
+
+
+def disallow_changes():
+    global SAFE_MODE
+    SAFE_MODE = True
+    print("🔒 SAFE MODE ENABLED - All write operations blocked.")
 
 
 def search_track(track_name, artist_name=None, limit=1):
@@ -304,5 +320,90 @@ def print_current_playlist_tracks_data():
     print_playlist_tracks_data(playlist_id)
 
 
+def clone_playlist(source_playlist_id, new_name=None, execute=False):
+    """
+    Parameters:
+    - source_playlist_id: Spotify ID of the playlist to clone
+    - new_name: Optional name for the new playlist
+    - execute: If False, runs as dry-run (preview only)
+    """
+    
+    sp = create_sp()
+
+    if not assert_safe_mode():
+        return None  # Blocked by global SAFE_MODE
+
+    playlist = sp.playlist(source_playlist_id)
+    tracks = get_playlist_tracks(source_playlist_id)
+
+    if not new_name:
+        new_name = playlist["name"] + " (Cloned)"
+
+    print(f"Cloning playlist:")
+    print(f"  Source: {playlist['name']} ({source_playlist_id})")
+    print(f"  New Name: {new_name}")
+    print(f"  Track Count: {len(tracks)}")
+
+    if not execute:
+        print("❌ Dry-run mode: No playlist created.")
+        return None
+
+    # Create the new playlist
+    user_id = sp.current_user()["id"]
+    new_playlist = sp.user_playlist_create(user_id, new_name, public=False)
+
+    # Add tracks in chunks of 100 (Spotify API limit)
+    track_ids = [t["id"] for t in tracks]
+    for i in range(0, len(track_ids), 100):
+        sp.playlist_add_items(new_playlist["id"], track_ids[i:i+100])
+
+    print(f"Playlist cloned successfully: {new_playlist['id']}")
+    return new_playlist["id"]
+
+
+def add_track_to_playlist(playlist_id, track_id, execute=False):
+    sp = create_sp()
+
+    if not assert_safe_mode():
+        return None
+
+    print(f"Adding track {track_id} to playlist {playlist_id}")
+
+    if not execute:
+        print("❌ Dry-run: Not modifying playlist.")
+        return
+
+    sp.playlist_add_items(playlist_id, [track_id])
+    print("✅ Track added.")
+
+
+def remove_track_from_playlist(playlist_id, track_id, execute=False):
+    sp = create_sp()
+
+    if not assert_safe_mode():
+        return None
+
+    print(f"Removing track {track_id} from playlist {playlist_id}")
+
+    if not execute:
+        print("❌ Dry-run: Not modifying playlist.")
+        return
+
+    sp.playlist_remove_specific_occurrences_of_items(
+        playlist_id,
+        [{'uri': f'spotify:track:{track_id}', 'positions': []}]
+    )
+
+    print("✅ Track removed.")
+
+
+def assert_safe_mode():
+    if SAFE_MODE:
+        print("🔒 SAFE MODE is ON - Write operations are blocked.")
+        return False
+    return True
+
+
 if __name__ == "__main__":
-    print_current_playlist_info()
+    id = get_current_playlist_id()
+    clone_playlist(id)
