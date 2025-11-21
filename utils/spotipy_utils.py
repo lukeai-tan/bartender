@@ -167,6 +167,20 @@ def previous_track():
         print("Error going to previous track:", e)
 
 
+"""
+Spotipy Playlist Operations
+"""
+def get_current_track_id():
+    info = get_current_playing()
+    if not info:
+        return None
+    return info["id"]
+
+def print_current_track_id():
+    track_id = get_current_track_id()
+    print("Current track id:", track_id)
+    
+
 def play_track_in_playlist(playlist_id, track_id):
     sp = create_sp()
     sp.start_playback(
@@ -404,6 +418,42 @@ def assert_safe_mode():
     return True
 
 
+"""
+Fetch Audio Features
+"""
+
+def print_audio_features(features):
+    """
+    Pretty-print audio features dictionary.
+    `features` should include keys like:
+    danceability, energy, loudness, speechiness, acousticness, instrumentalness, liveness, valence, tempo
+    """
+    if not features:
+        print("🎵 No audio features available.")
+        return
+
+    print(f"\n🎚 Audio Features")
+    print("──────────────────────────────")
+    print(f"Acousticness:     {features.get('acousticness')}")
+    print(f"Danceability:     {features.get('danceability')}")
+    print(f"Energy:           {features.get('energy')}")
+    print(f"Instrumentalness: {features.get('instrumentalness')}")
+    print(f"Liveness:         {features.get('liveness')}")
+    print(f"Loudness (dB):    {features.get('loudness')}")
+    print(f"Speechiness:      {features.get('speechiness')}")
+    print(f"Valence:          {features.get('valence')}")
+    print(f"Tempo (BPM):      {features.get('tempo')}")
+    if "key" in features:
+        print(f"Key:              {features['key']}")
+    if "mode" in features:
+        print(f"Mode:             {features['mode']}")
+    if "time_signature" in features:
+        print(f"Time Signature:   {features['time_signature']}")
+    print("──────────────────────────────\n")
+
+
 if __name__ == "__main__":
-    id = get_current_playlist_id()
-    clone_playlist(id)
+    import reccobeats_utils
+    track_id = get_current_track_id()
+    features = reccobeats_utils.get_reccobeats_features(track_id)
+    print_audio_features(features)
