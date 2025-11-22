@@ -1,17 +1,18 @@
-# Welcome to MkDocs
+# Welcome to Bartender
 
-For full documentation visit [mkdocs.org](https://www.mkdocs.org).
+Welcome to **Bartender**. Would you like your tracks shaken, not stirred?
 
-## Commands
+## What Bartender Does
 
-* `mkdocs new [dir-name]` - Create a new project.
-* `mkdocs serve` - Start the live-reloading docs server.
-* `mkdocs build` - Build the documentation site.
-* `mkdocs -h` - Print help message and exit.
 
-## Project layout
-
-    mkdocs.yml    # The configuration file.
-    docs/
-        index.md  # The documentation homepage.
-        ...       # Other markdown pages, images and other files.
+## Getting Started
+1. Clone the Bartender repository:  
+   ```bash
+   git clone <your-repo-url>
+   cd bartender
+   ```
+2. Install dependencies:
+    ```
+    pip install -r requirements.txt
+    ```
+3. Run Bartender and start mixing your tracks!
