@@ -15,3 +15,4 @@ nav:
   - Home: index.md
   - API Reference:
       - Spotify Utils: spotify_utils.md
+      - ReccoBeats Utils: reccobeats_utils.md
