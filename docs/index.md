@@ -7,12 +7,12 @@ Welcome to **Bartender**. Would you like your tracks shaken, not stirred?
 
 ## Getting Started
 1. Clone the Bartender repository:  
-   ```bash
-   git clone <your-repo-url>
-   cd bartender
-   ```
+```bash
+git clone <your-repo-url>
+cd bartender
+```
 2. Install dependencies:
-    ```
-    pip install -r requirements.txt
-    ```
+```bash
+pip install -r requirements.txt
+```
 3. Run Bartender and start mixing your tracks!
