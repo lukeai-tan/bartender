@@ -1,6 +1,6 @@
 # Spotify Utils
 
-Utility functions for interacting with the Spotify Web API using the **Spotipy** library.  
+Utility functions for interacting with the **Spotify Web API** using the **Spotipy** library.  
 This module provides tools for playback control, playlist management, searching music, and inspecting currently playing data.
 
 ---
