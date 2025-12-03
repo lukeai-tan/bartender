@@ -39,7 +39,7 @@ def print_reccobeats_track_title(spotify_id):
     print("Track Title:", track_title)
 
 
-def get_reccobeats_audio_features(track_id):
+def get_reccobeats_audio_features_with_reccobeats_id(track_id):
     """Fetch ReccoBeats audio features for a ReccoBeats track ID."""
     url = f"{BASE_URL}/track/{track_id}/audio-features"
     response = requests.get(url)
@@ -51,9 +51,8 @@ def get_reccobeats_audio_features(track_id):
     return response.json()
 
 
-def print_reccobeats_audio_features(spotify_id):
-    """Fetch and print audio features for a Spotify track via ReccoBeats."""
-    # convert Spotify URI to just the ID if needed
+def get_reccobeats_audio_features_with_spotify_id(spotify_id):
+    """Fetch audio features for a Spotify track via ReccoBeats."""
     if spotify_id.startswith("spotify:track:"):
         spotify_id = spotify_id.split(":")[-1]
 
@@ -67,7 +66,13 @@ def print_reccobeats_audio_features(spotify_id):
     recco_id = response.json()["content"][0]["id"]
 
     # fetch audio features
-    features = get_reccobeats_audio_features(recco_id)
+    features = get_reccobeats_audio_features_with_reccobeats_id(recco_id)
+    return features
+
+
+def print_reccobeats_audio_features(spotify_id):
+    """Print audio features for a Spotify track via ReccoBeats."""
+    features = get_reccobeats_audio_features_with_spotify_id(spotify_id)
     if not features:
         print("No audio features available.")
         return

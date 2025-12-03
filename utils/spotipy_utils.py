@@ -421,7 +421,6 @@ def assert_safe_mode():
 """
 Fetch Audio Features
 """
-
 def print_audio_features(features):
     """
     Pretty-print audio features dictionary.
