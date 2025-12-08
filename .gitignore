@@ -13,6 +13,7 @@ env/
 ENV/
 *.log
 *.cache
+*.csv
 
 # ---- Environment Variables ----
 .env

@@ -1,5 +1,5 @@
 import requests
-from spotipy_utils import *
+from utils.spotipy_utils import *
 
 BASE_URL = "https://api.reccobeats.com/v1"
 

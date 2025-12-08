@@ -1,78 +1,30 @@
-import numpy as np
-import pandas as pd
 from sklearn.preprocessing import StandardScaler
 from sklearn.cluster import KMeans
 from sklearn.metrics import silhouette_score
-
-from reccobeats_utils import (
-    get_reccobeats_track_data,
-    get_reccobeats_audio_features
-)
-from spotipy_utils import *
-
-
-AUDIO_FEATURE_KEYS = [
-    "danceability",
-    "energy",
-    "loudness",
-    "speechiness",
-    "acousticness",
-    "instrumentalness",
-    "liveness",
-    "valence",
-    "tempo",
-]
+from utils.spotipy_utils import *
+from utils.caching_utils import fetch_and_cache_playlist, AUDIO_FEATURE_KEYS
 
 
 def cluster_playlist_with_reccobeats(playlist_id, k=None):
     """
-    Cluster a Spotify playlist using ReccoBeats audio features.
-
-    k = None → automatically finds best k using silhouette score.
+    Cluster a playlist using cached ReccoBeats features.
     """
 
-    playlist_tracks = get_playlist_tracks(playlist_id)
+    df = fetch_and_cache_playlist(playlist_id)
 
-    all_features = []
-    labels = []
+    # Features matrix
+    X = df[AUDIO_FEATURE_KEYS].to_numpy()
 
-    for track in playlist_tracks:
-        spotify_id = track["id"]
-
-        # Get ReccoBeats track entry
-        track_data = get_reccobeats_track_data(spotify_id)
-        if not track_data:
-            continue
-
-        recco_id = track_data["id"]
-
-        # Get audio features
-        features = get_reccobeats_audio_features(recco_id)
-        if not features:
-            continue
-
-        try:
-            vector = [features[key] for key in AUDIO_FEATURE_KEYS]
-        except KeyError:
-            continue
-
-        all_features.append(vector)
-        labels.append(f"{track['name']} — {track['artists']}")
-
-    # Convert to numpy array
-    X = np.array(all_features)
-
-    # Normalize features
+    # Normalize
     scaler = StandardScaler()
     X_scaled = scaler.fit_transform(X)
 
-    # Auto-k mode
+    # Auto-k selection
     if k is None:
         best_k = None
         best_score = -1
-        possible = range(2, min(10, len(X_scaled)))
 
-        for test_k in possible:
+        for test_k in range(2, min(10, len(X_scaled))):
             km = KMeans(n_clusters=test_k, random_state=42)
             clusters = km.fit_predict(X_scaled)
             score = silhouette_score(X_scaled, clusters)
@@ -88,13 +40,14 @@ def cluster_playlist_with_reccobeats(playlist_id, k=None):
     model = KMeans(n_clusters=k, random_state=42)
     cluster_ids = model.fit_predict(X_scaled)
 
-    # Print output bartender style
+    # Print clusters bartender style
     print(f"\n🍸 Clusters (k={k})")
     print("─────────────────────────────────────")
 
     clusters = {i: [] for i in range(k)}
 
-    for label, cid in zip(labels, cluster_ids):
+    for (_, row), cid in zip(df.iterrows(), cluster_ids):
+        label = f"{row['name']} — {row['artists']}"
         clusters[cid].append(label)
 
     for cid, songs in clusters.items():
@@ -104,6 +57,7 @@ def cluster_playlist_with_reccobeats(playlist_id, k=None):
             print(f"• {s}")
 
     return clusters
+
 
 
 if __name__ == "__main__":
