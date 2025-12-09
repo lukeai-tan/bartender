@@ -80,6 +80,7 @@ def cluster_current_playlist_with_reccobeats():
     cluster_result: ClusterResult = cluster_playlist_with_reccobeats(playlist_id=playlist_id)
     return cluster_result
 
+
 def print_current_playlist_clusters():
     cluster_result: ClusterResult = cluster_current_playlist_with_reccobeats()
     print_clusters(cluster_result=cluster_result)
