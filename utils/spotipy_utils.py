@@ -124,6 +124,7 @@ def print_current_playing():
     print(f"  Playing: {info['is_playing']}")
     print(f"  Progress:  {progress} / {duration}")
 
+
 def ms_to_min_sec(ms):
     seconds = ms // 1000
     minutes = seconds // 60
@@ -175,6 +176,7 @@ def get_current_track_id():
     if not info:
         return None
     return info["id"]
+
 
 def print_current_track_id():
     track_id = get_current_track_id()
