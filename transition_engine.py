@@ -23,10 +23,13 @@ class TransitionEngine:
         idx = distances.argmin()
         return self.df.iloc[idx]
     
-    def _order_clusters(self):
+    def _order_clusters(self, mode="nearest"):
         """
-        Order clusters using nearest-neighbour heuristic on centroids.
-        Returns a list of cluster IDs.
+        Order clusters using a greedy heuristic on centroid distances.
+
+        mode:
+            - "nearest"  : smooth transitions (stirred)
+            - "furthest" : high contrast transitions (shaken)
         """
         k = len(self.clusters)
 
@@ -37,12 +40,22 @@ class TransitionEngine:
         path.append(current)
         unvisited.remove(current)
 
+        if mode == "nearest":
+            chooser = min
+        elif mode == "farthest":
+            chooser = max
+        else:
+            raise ValueError(f"Unknown ordering mode: {mode}")
+
         while unvisited:
-            next_c = min(unvisited, key=lambda c: self._cluster_distance(current, c))
+            next_c = chooser(
+                unvisited,
+                key=lambda c: self._cluster_distance(current, c)
+            )
             path.append(next_c)
             unvisited.remove(next_c)
             current = next_c
-        
+
         return path
 
     def _append_cluster_songs(self, cid, final_sequence, used_song_ids):
@@ -78,7 +91,7 @@ class TransitionEngine:
         - Dump cluster songs in order
         - Insert midpoint songs between clusters
         """
-        path = self._order_clusters()
+        path = self._order_clusters(mode="nearest")
 
         final_sequence = []
         used_song_ids = set()
@@ -107,13 +120,22 @@ class TransitionEngine:
 
     def generate_shaken(self):
         """
-        Chaotic but fun transitions:
-        - Jump across clusters
-        - Ensure high audio contrast
-        - Still avoids completely random noise
+        High-contrast transitions:
+        - Order clusters by farthest-neighbour heuristic
+        - Dump cluster songs with no midpoint smoothing
+        - Produces energetic and punchy transitions
         """
-        pass
-    
+        path = self._order_clusters(mode="farthest")
+
+        final_sequence = []
+        used_song_ids = set()
+
+        for cid in path:
+            self._append_cluster_songs(cid, final_sequence, used_song_ids)
+
+        return final_sequence
+
+
     def generate(self, mode="stirred"):
         if mode == "stirred":
             return self.generate_stirred()
@@ -134,5 +156,5 @@ if __name__ == "__main__":
     
     cluster_result:ClusterResult = cluster_current_playlist_with_reccobeats()
     engine = TransitionEngine(cluster_result=cluster_result)
-    sequence = engine.generate_stirred()
+    sequence = engine.generate_shaken()
     engine.debug_print_sequence(sequence)
