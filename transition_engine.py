@@ -1,4 +1,4 @@
-from clustering.clustering import *
+from clustering.clustering import ClusterResult, cluster_current_playlist_with_reccobeats
 import numpy as np
 
 class TransitionEngine:
@@ -22,15 +22,88 @@ class TransitionEngine:
         distances = np.linalg.norm(self.X - vec, axis=1)
         idx = distances.argmin()
         return self.df.iloc[idx]
+    
+    def _order_clusters(self):
+        """
+        Order clusters using nearest-neighbour heuristic on centroids.
+        Returns a list of cluster IDs.
+        """
+        k = len(self.clusters)
+
+        unvisited = set(range(k))
+        path = []
+
+        current = 0 # start with 0 for now
+        path.append(current)
+        unvisited.remove(current)
+
+        while unvisited:
+            next_c = min(unvisited, key=lambda c: self._cluster_distance(current, c))
+            path.append(next_c)
+            unvisited.remove(next_c)
+            current = next_c
+        
+        return path
+
+    def _append_cluster_songs(self, cid, final_sequence, used_song_ids):
+        """
+        Append all songs from a cluster to final_sequence,
+        avoiding duplicates.
+        """
+        for idx in self.clusters[cid]:
+            row = self.df.iloc[idx]
+            sid = row["spotify_id"]
+
+            if sid not in used_song_ids:
+                final_sequence.append(row.to_dict())
+                used_song_ids.add(sid)
+
+
+    def _find_midpoint_song(self, a, b):
+        """
+        Find the song closest to the midpoint between
+        cluster a and cluster b centroids.
+        """
+        centroid_a = self._centroid(a)
+        centroid_b = self._centroid(b)
+
+        midpoint = (centroid_a + centroid_b) / 2
+        return self._closest_song_to_vector(midpoint)
+
 
     def generate_stirred(self):
         """
         Smooth transitions:
-        - Follow clusters in order of centroid proximity
+        - Order clusters by nearest-neighbour heuristic
+        - Dump cluster songs in order
         - Insert midpoint songs between clusters
-        - Final output is a smooth-flowing playlist
         """
-        pass
+        path = self._order_clusters()
+
+        final_sequence = []
+        used_song_ids = set()
+
+        # Walk cluster path
+        for i in range(len(path) - 1):
+            a = path[i]
+            b = path[i + 1]
+
+            # Dump current cluster
+            self._append_cluster_songs(a, final_sequence, used_song_ids)
+
+            # Insert midpoint transition
+            mid_song = self._find_midpoint_song(a, b)
+            sid = mid_song["spotify_id"]
+
+            if sid not in used_song_ids:
+                final_sequence.append(mid_song.to_dict())
+                used_song_ids.add(sid)
+
+        # Dump last cluster
+        self._append_cluster_songs(path[-1], final_sequence, used_song_ids)
+
+        return final_sequence
+
 
     def generate_shaken(self):
         """
@@ -48,8 +121,18 @@ class TransitionEngine:
             return self.generate_shaken()
         else:
             raise ValueError(f"Unknown mode: {mode}")
-   
+    
+    def debug_print_sequence(self, sequence):
+        print("\n=== GENERATED SEQUENCE ===")
+        for i, track in enumerate(sequence):
+            print(f"{i+1:02d}. {track['name']} - {track['artists']}  ({track['spotify_id']})")
+
 
 
 if __name__ == "__main__":
-    print_current_playlist_clusters()
+    #print_current_playlist_clusters()
+    
+    cluster_result:ClusterResult = cluster_current_playlist_with_reccobeats()
+    engine = TransitionEngine(cluster_result=cluster_result)
+    sequence = engine.generate_stirred()
+    engine.debug_print_sequence(sequence)

@@ -50,8 +50,9 @@ def cluster_playlist_with_reccobeats(playlist_id, k=None):
     clusters = {cid: [] for cid in range(k)}
 
     for (_, row), cid in zip(df.iterrows(), cluster_ids):
-        label = f"{row['name']} — {row['artists']}"
-        clusters[cid].append(label)
+        #label = f"{row['name']} — {row['artists']}"
+        #clusters[cid].append(label)
+        clusters[cid].append(row.name)
 
     return ClusterResult(
         clusters=clusters,
@@ -64,15 +65,18 @@ def cluster_playlist_with_reccobeats(playlist_id, k=None):
 
 def print_clusters(cluster_result: ClusterResult):
     clusters = cluster_result.clusters
+    df = cluster_result.df  # DataFrame with song info
 
     print(f"\n🍸 Clusters (k={len(clusters)})")
     print("─────────────────────────────────────")
 
-    for cid, songs in clusters.items():
+    for cid, indices in clusters.items():
         print(f"\n🍹 Cluster {cid + 1} - Flavor Profile")
         print("──────────────────────────────")
-        for s in songs:
-            print(f"• {s}")
+
+        for idx in indices:
+            row = df.iloc[idx]
+            print(f"• {row['name']} — {row['artists']}")
         
 
 def cluster_current_playlist_with_reccobeats():
