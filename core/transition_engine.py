@@ -1,5 +1,7 @@
-from clustering.clustering import ClusterResult, cluster_current_playlist_with_reccobeats
+from core.clustering import ClusterResult, cluster_current_playlist_with_reccobeats
+from utils.spotipy_utils import render_playlist, allow_changes
 import numpy as np
+import random
 
 class TransitionEngine:
     def __init__(self, cluster_result):
@@ -8,6 +10,7 @@ class TransitionEngine:
         self.X = cluster_result.X_scaled
         self.model = cluster_result.model
         self.clusters = cluster_result.clusters
+        self.song_to_cluster = self._build_song_cluster_map()
     
     def _centroid(self, cid):
         return self.model.cluster_centers_[cid]
@@ -28,8 +31,8 @@ class TransitionEngine:
         Order clusters using a greedy heuristic on centroid distances.
 
         mode:
-            - "nearest"  : smooth transitions (stirred)
-            - "furthest" : high contrast transitions (shaken)
+            - "nearest"  : Nearest Neighbour
+            - "furthest" : Furthest Neighbour
         """
         k = len(self.clusters)
 
@@ -58,9 +61,9 @@ class TransitionEngine:
 
         return path
 
-    def _append_cluster_songs(self, cid, final_sequence, used_song_ids):
+    def _append_cluster_songs(self, cid, sequence, used_song_ids):
         """
-        Append all songs from a cluster to final_sequence,
+        Append all songs from a cluster to sequence,
         avoiding duplicates.
         """
         for idx in self.clusters[cid]:
@@ -68,8 +71,13 @@ class TransitionEngine:
             sid = row["spotify_id"]
 
             if sid not in used_song_ids:
-                final_sequence.append(row.to_dict())
+                sequence.append(row.to_dict())
                 used_song_ids.add(sid)
+
+
+    def _append_song(self, sequence, used_song_ids, idx):
+        used_song_ids.add(idx)
+        sequence.append(self.df.iloc[idx].to_dict())
 
 
     def _find_midpoint_song(self, a, b):
@@ -84,6 +92,36 @@ class TransitionEngine:
         return self._closest_song_to_vector(midpoint)
 
 
+    def _build_song_cluster_map(self):
+        song_to_cluster = {}
+        for cid, indices in self.clusters.items():
+            for idx in indices:
+                song_to_cluster[idx] = cid
+        return song_to_cluster
+
+
+    def _farthest_song(self, from_idx, candidates):
+        from_vec = self.X[from_idx]
+        return max(
+            candidates,
+            key=lambda idx: np.linalg.norm(self.X[idx] - from_vec)
+        )
+
+    def _get_shaken_candidates(self, current_cluster, used_song_ids, intra_prob):
+        if random.random() < intra_prob:
+            candidates = [
+                idx for idx in self.clusters[current_cluster]
+                if idx not in used_song_ids
+            ]
+            if candidates:
+                return candidates
+
+        return [
+            idx for idx in range(len(self.df))
+            if idx not in used_song_ids and self.song_to_cluster[idx] != current_cluster
+        ]
+
+
     def generate_stirred(self):
         """
         Smooth transitions:
@@ -93,7 +131,7 @@ class TransitionEngine:
         """
         path = self._order_clusters(mode="nearest")
 
-        final_sequence = []
+        sequence = []
         used_song_ids = set()
 
         # Walk cluster path
@@ -102,38 +140,53 @@ class TransitionEngine:
             b = path[i + 1]
 
             # Dump current cluster
-            self._append_cluster_songs(a, final_sequence, used_song_ids)
+            self._append_cluster_songs(a, sequence, used_song_ids)
 
             # Insert midpoint transition
             mid_song = self._find_midpoint_song(a, b)
             sid = mid_song["spotify_id"]
 
             if sid not in used_song_ids:
-                final_sequence.append(mid_song.to_dict())
+                sequence.append(mid_song.to_dict())
                 used_song_ids.add(sid)
 
         # Dump last cluster
-        self._append_cluster_songs(path[-1], final_sequence, used_song_ids)
+        self._append_cluster_songs(path[-1], sequence, used_song_ids)
 
-        return final_sequence
+        return sequence
 
 
-    def generate_shaken(self):
-        """
-        High-contrast transitions:
-        - Order clusters by farthest-neighbour heuristic
-        - Dump cluster songs with no midpoint smoothing
-        - Produces energetic and punchy transitions
-        """
-        path = self._order_clusters(mode="farthest")
-
-        final_sequence = []
+    def generate_shaken(self, intra_prob=0.7):
+        n = len(self.df)
         used_song_ids = set()
 
-        for cid in path:
-            self._append_cluster_songs(cid, final_sequence, used_song_ids)
+        current_idx = random.randrange(n)
+        sequence = []
+        self._append_song(sequence, used_song_ids, current_idx)
 
-        return final_sequence
+        current_cluster = self.song_to_cluster[current_idx]
+
+        while len(used_song_ids) < n:
+            candidates = self._get_shaken_candidates(
+                current_cluster, used_song_ids, intra_prob
+            )
+
+            if not candidates:
+                candidates = [
+                    idx for idx in range(len(self.df))
+                    if idx not in used_song_ids
+                ]
+                if not candidates:
+                    break
+
+            next_idx = self._farthest_song(current_idx, candidates)
+
+            self._append_song(sequence, used_song_ids, next_idx)
+
+            current_idx = next_idx
+            current_cluster = self.song_to_cluster[current_idx]
+
+        return sequence
 
 
     def generate(self, mode="stirred"):
@@ -157,4 +210,12 @@ if __name__ == "__main__":
     cluster_result:ClusterResult = cluster_current_playlist_with_reccobeats()
     engine = TransitionEngine(cluster_result=cluster_result)
     sequence = engine.generate_shaken()
-    engine.debug_print_sequence(sequence)
+    track_ids = [s["spotify_id"] for s in sequence]
+    allow_changes()
+    render_playlist(
+        track_ids,
+        name="Bartender - Shaken",
+        description="Experimental Shaken Mode",
+        execute=True
+    )
+

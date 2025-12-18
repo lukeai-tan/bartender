@@ -1,7 +1,4 @@
-from spotify_controller import controller
-
-def main():
-    controller()
+from interface.controller import BartenderController
 
 if __name__ == "__main__":
-    main()
+    BartenderController().run()

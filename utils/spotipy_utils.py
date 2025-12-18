@@ -413,6 +413,50 @@ def remove_track_from_playlist(playlist_id, track_id, execute=False):
     print("✅ Track removed.")
 
 
+def render_playlist(
+    track_ids,
+    name,
+    description="",
+    public=False,
+    execute=False
+):
+    """
+    Create a new playlist from an ordered list of Spotify track IDs.
+    """
+    sp = create_sp()
+
+    if not assert_safe_mode():
+        return None
+
+    print(f"Rendering playlist:")
+    print(f"  Name: {name}")
+    print(f"  Tracks: {len(track_ids)}")
+
+    if not execute:
+        print("❌ Dry-run: Playlist not created.")
+        return None
+
+    user_id = sp.current_user()["id"]
+
+    playlist = sp.user_playlist_create(
+        user=user_id,
+        name=name,
+        public=public,
+        description=description
+    )
+
+    uris = [f"spotify:track:{tid}" for tid in track_ids]
+
+    for i in range(0, len(uris), 100):
+        sp.playlist_add_items(
+            playlist["id"],
+            uris[i:i+100]
+        )
+
+    print(f"✅ Playlist created: {playlist['id']}")
+    return playlist["id"]
+
+
 def assert_safe_mode():
     if SAFE_MODE:
         print("🔒 SAFE MODE is ON - Write operations are blocked.")
