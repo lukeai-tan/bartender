@@ -14,6 +14,7 @@ markdown_extensions:
 nav:
   - Home: index.md
   - How Bartender Works: bartender_explained.md
+  - FAQ: faq.md
   - API Reference:
       - Spotify Utils: api_reference/spotify_utils.md
       - ReccoBeats Utils: api_reference/reccobeats_utils.md
