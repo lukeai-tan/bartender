@@ -16,7 +16,7 @@ Full documentation is available [here](https://lukeai-tan.github.io/bartender/).
 ## Getting Started
 1. Clone the Bartender repository:  
 ```bash
-git clone <your-repo-url>
+git clone https://github.com/lukeai-tan/bartender
 cd bartender
 ```
 2. Install dependencies:
