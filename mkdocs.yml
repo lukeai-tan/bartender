@@ -13,6 +13,7 @@ markdown_extensions:
       permalink: true
 nav:
   - Home: index.md
+  - How Bartender Works: bartender_explained.md
   - API Reference:
-      - Spotify Utils: spotify_utils.md
-      - ReccoBeats Utils: reccobeats_utils.md
+      - Spotify Utils: api_reference/spotify_utils.md
+      - ReccoBeats Utils: api_reference/reccobeats_utils.md
