@@ -1,0 +1,1120 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="..">
+      
+      
+        <link rel="next" href="../api_reference/spotify_utils/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.0">
+    
+    
+      
+        <title>How Bartender Works - Bartender Docs</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.618322db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#how-bartender-works" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Bartender Docs" class="md-header__button md-logo" aria-label="Bartender Docs" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Bartender Docs
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              How Bartender Works
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Bartender Docs" class="md-nav__button md-logo" aria-label="Bartender Docs" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Bartender Docs
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    How Bartender Works
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    How Bartender Works
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#why-i-built-this-transition-engine" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why I Built This Transition Engine
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#explaining-bartender" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Explaining Bartender
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#explaining-clustering" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Explaining Clustering
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#introducing-the-two-transition-modes-stirred-vs-shaken" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Introducing the two transition modes: Stirred vs Shaken
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Introducing the two transition modes: Stirred vs Shaken">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#stirred-mode" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Stirred Mode
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Stirred Mode">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#step-1-cluster-the-playlist" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 1: Cluster the playlist
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-2-order-clusters-by-similarity" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 2: Order clusters by similarity
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-3-insert-a-midpoint-transition-song" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 3: Insert a midpoint transition song
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-4-assemble-the-final-playlist" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 4: Assemble the final playlist
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#shaken-mode" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Shaken Mode
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Shaken Mode">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#step-1-choose-a-random-starting-song" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 1: Choose a random starting song
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-2-decide-jump-type-controlled-chaos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 2: Decide jump type (controlled chaos)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-3-maximise-contrast" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 3: Maximise contrast
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-4-repeat-until-all-songs-are-used" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 4: Repeat until all songs are used
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conclusion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Conclusion
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#faq" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        FAQ
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="FAQ">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#whats-the-difference-between-stirred-and-shaken" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What's the difference between Stirred and Shaken?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#why-dont-transitions-involve-actual-audio-crossfades-or-beat-matching" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why don't transitions involve actual audio crossfades or beat matching?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#can-songs-repeat-or-be-skipped" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Can songs repeat or be skipped?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#why-use-k-means-clustering" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why use K-Means clustering?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#is-this-meant-to-be-a-real-dj-replacement" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Is this meant to be a real DJ replacement?
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Reference
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    API Reference
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api_reference/spotify_utils/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Spotify Utils
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api_reference/reccobeats_utils/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ReccoBeats Utils
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#why-i-built-this-transition-engine" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why I Built This Transition Engine
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#explaining-bartender" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Explaining Bartender
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#explaining-clustering" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Explaining Clustering
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#introducing-the-two-transition-modes-stirred-vs-shaken" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Introducing the two transition modes: Stirred vs Shaken
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Introducing the two transition modes: Stirred vs Shaken">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#stirred-mode" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Stirred Mode
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Stirred Mode">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#step-1-cluster-the-playlist" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 1: Cluster the playlist
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-2-order-clusters-by-similarity" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 2: Order clusters by similarity
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-3-insert-a-midpoint-transition-song" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 3: Insert a midpoint transition song
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-4-assemble-the-final-playlist" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 4: Assemble the final playlist
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#shaken-mode" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Shaken Mode
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Shaken Mode">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#step-1-choose-a-random-starting-song" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 1: Choose a random starting song
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-2-decide-jump-type-controlled-chaos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 2: Decide jump type (controlled chaos)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-3-maximise-contrast" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 3: Maximise contrast
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-4-repeat-until-all-songs-are-used" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 4: Repeat until all songs are used
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conclusion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Conclusion
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#faq" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        FAQ
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="FAQ">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#whats-the-difference-between-stirred-and-shaken" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What's the difference between Stirred and Shaken?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#why-dont-transitions-involve-actual-audio-crossfades-or-beat-matching" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why don't transitions involve actual audio crossfades or beat matching?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#can-songs-repeat-or-be-skipped" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Can songs repeat or be skipped?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#why-use-k-means-clustering" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why use K-Means clustering?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#is-this-meant-to-be-a-real-dj-replacement" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Is this meant to be a real DJ replacement?
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="how-bartender-works">How Bartender Works<a class="headerlink" href="#how-bartender-works" title="Permanent link">&para;</a></h1>
+<h2 id="why-i-built-this-transition-engine">Why I Built This Transition Engine<a class="headerlink" href="#why-i-built-this-transition-engine" title="Permanent link">&para;</a></h2>
+<p>When I add songs on spotify, I tend to just toss in any song I was interested in at that point in time into my main playlist. In 2024, I got really into J-POP, so I added a bunch of J-POP classics into the mix. Fast forward into 2025, Expedition 33 and Hollow Knight: SilkSong came out, and of course I dumped the soundtracks' greatest hits into there. </p>
+<p>As you can probably tell, the huge difference in genres that make up my playlist has consequently made it into a mess. I tried using the shuffle feature to spread out my tracks evenly but I felt that it wasn't really working. </p>
+<p>I realised what I needed was something that could strategically organise my songs such that I wouldn't get whiplash when the tracks switched from a calm OST to a sudden high BPM boss fight OST.</p>
+<h2 id="explaining-bartender">Explaining Bartender<a class="headerlink" href="#explaining-bartender" title="Permanent link">&para;</a></h2>
+<p>I chose the theme Bartender because I envisioned a bartender shaking up and mixing drinks, or rather songs, and then serving them as one playlist. It also kind of works out because of the play on words "bar" and "tender", like bars of a song. I am very funny.</p>
+<p>The core functionality of Bartender can be broken down into these steps:</p>
+<ol>
+<li>Analyse your playlist songs</li>
+<li>Cluster them by audio features</li>
+<li>Rearrange the songs with a transition algorithm</li>
+<li>Spit out the new playlist (voilà)</li>
+</ol>
+<p>The playlist is intended to be played in the given order, so you won't see any difference if you play it on shuffle or magic shuffle.</p>
+<h2 id="explaining-clustering">Explaining Clustering<a class="headerlink" href="#explaining-clustering" title="Permanent link">&para;</a></h2>
+<p>The clustering algorithm is quite simple. First, I utilised the Spotify Web API to fetch all the songs in the playlist. I then used Reccobeats to fetch their individual audio features, and convert them into column vectors. Using K-means Clustering, I split the playlist up into k clusters, with each cluster having songs with similar patterns or audio features. </p>
+<h2 id="introducing-the-two-transition-modes-stirred-vs-shaken">Introducing the two transition modes: Stirred vs Shaken<a class="headerlink" href="#introducing-the-two-transition-modes-stirred-vs-shaken" title="Permanent link">&para;</a></h2>
+<p>My inspiration for the transition modes came from the iconic catchphrase "Shaken, not stirred" from James Bond. I don't know what it means nor have I watched James Bond.</p>
+<h3 id="stirred-mode">Stirred Mode<a class="headerlink" href="#stirred-mode" title="Permanent link">&para;</a></h3>
+<p>The Stirred mode is designed to simulate a smooth pour kind of transition.
+The idea is simple:
+songs that sound similar should play close together, and transitions between different "flavours" of music should be more natural rather than abrupt.</p>
+<h4 id="step-1-cluster-the-playlist">Step 1: Cluster the playlist<a class="headerlink" href="#step-1-cluster-the-playlist" title="Permanent link">&para;</a></h4>
+<p>First, the playlist is clustered using audio features such as energy, tempo, valence, and danceability.
+Each cluster represents a flavor profile, which is what I call a group of songs that are already musically similar.
+Since songs within a cluster are close to each other in feature space, playing them consecutively already produces a smooth listening experience.</p>
+<h4 id="step-2-order-clusters-by-similarity">Step 2: Order clusters by similarity<a class="headerlink" href="#step-2-order-clusters-by-similarity" title="Permanent link">&para;</a></h4>
+<p>Stirred mode determines the order in which clusters should be played. Starting from an initial cluster, the algorithm repeatedly selects the nearest unvisited cluster, based on the distance between the cluster centroids. This is done using a greedy nearest-neighbour heuristic. This results in an ordering where each cluster transition is as smooth as possible</p>
+<h4 id="step-3-insert-a-midpoint-transition-song">Step 3: Insert a midpoint transition song<a class="headerlink" href="#step-3-insert-a-midpoint-transition-song" title="Permanent link">&para;</a></h4>
+<p>To further soften transitions between clusters, Stirred mode introduced a midpoint song.</p>
+<p>For each transition from cluster A to B:</p>
+<ol>
+<li>
+<p>Draw a line between the centroids of cluster A and B</p>
+</li>
+<li>
+<p>Compute the midpoint M of that line</p>
+</li>
+<li>
+<p>Find the sond whose audio feature vector is closest to M</p>
+</li>
+</ol>
+<p>This midpoint song acts like a bridge between clusters, where it theoretically shares characteristics of both clusters and helps ease the listener into the next flavour.</p>
+<h4 id="step-4-assemble-the-final-playlist">Step 4: Assemble the final playlist<a class="headerlink" href="#step-4-assemble-the-final-playlist" title="Permanent link">&para;</a></h4>
+<p>The final playlist is constructed as:</p>
+<ul>
+<li>All songs from cluster A</li>
+<li>A midpoint transition song</li>
+<li>All songs from cluster B</li>
+<li>Repeat until all clusters are visited</li>
+</ul>
+<h3 id="shaken-mode">Shaken Mode<a class="headerlink" href="#shaken-mode" title="Permanent link">&para;</a></h3>
+<p>The Shaken mode is the complete opposite.
+Instead of minimising distance between transitions, it maximises contrast.
+While Stirred mode's agenda is "What comes next most smoothly?", Shaken mode's agenda is "What would feel the most surprising right now?"</p>
+<p>In this mode:</p>
+<ul>
+<li>Songs frequently jump across distant clusters</li>
+<li>Transitions are intentionally energetic</li>
+<li>The playlist is unpredictable</li>
+</ul>
+<p>However, despite the chaos, Shaken mode is still controlled, where transitions are driven by audio feature distances rather than pure randomness alone.</p>
+<h4 id="step-1-choose-a-random-starting-song">Step 1: Choose a random starting song<a class="headerlink" href="#step-1-choose-a-random-starting-song" title="Permanent link">&para;</a></h4>
+<p>Shaken mode begins by selecting a random song from the playlist. This track becomes the starting point of the sequence and sets the stage for the initial musical context.</p>
+<h4 id="step-2-decide-jump-type-controlled-chaos">Step 2: Decide jump type (controlled chaos)<a class="headerlink" href="#step-2-decide-jump-type-controlled-chaos" title="Permanent link">&para;</a></h4>
+<p>At each step, the algorithm decides how the next song should be chosen. A random number n from 0 to 1 is drawn.</p>
+<p>With probability p (default 0.7):</p>
+<ul>
+<li>It attempts an intra-cluster jump, staying within the same flavour profile</li>
+<li>Considers only unused songs from the current cluster</li>
+</ul>
+<p>With probability 1 - p (default 0.3):</p>
+<ul>
+<li>It forces an inter-cluster jump, moving to a completely differenet flavour profile.</li>
+<li>Considers only unused songs from songs from all other clusters</li>
+</ul>
+<p>If no valid intra-cluster songs remain, the algorithm automatically falls back to an inter-cluster jump. Same for vice versa.</p>
+<p>This balance prevents the playlist from being either too smooth or completely chaotic.</p>
+<h4 id="step-3-maximise-contrast">Step 3: Maximise contrast<a class="headerlink" href="#step-3-maximise-contrast" title="Permanent link">&para;</a></h4>
+<p>Shaken mode selects the song that is fartest away from the current song in the feature space. This ensures that each transition introduces a maxmimum contrast.</p>
+<h4 id="step-4-repeat-until-all-songs-are-used">Step 4: Repeat until all songs are used<a class="headerlink" href="#step-4-repeat-until-all-songs-are-used" title="Permanent link">&para;</a></h4>
+<p>The algorithm repeats this process, selecting the farthest valid song at each step, be it intra or inter-cluster, until every song in the playlist has been used exactly once.</p>
+<p>The final result is a playlist that constantly keeps the listener on edge. </p>
+<h2 id="conclusion">Conclusion<a class="headerlink" href="#conclusion" title="Permanent link">&para;</a></h2>
+<p>Now, I can't say for sure whether these stirred or shaken transitions, defined purely by audio features, truly translate into their equivalent transitions when experienced by a human listener.</p>
+<p>Music perception is subjective and while the distance in audio feature space is a useful approximation for similarity and contrast, it probably doesn't fully capture the emotional context, or the narrative or taste the listener builds up over time, or whatever it is.</p>
+<p>Anyway, Bartender's original intention was never about finding a perfect transition. It was more of a passion project of mine to explore whether I could utilise simple geometric and clustering concepts to shape a playlist in a way that feels intentional instead of random. </p>
+<h2 id="faq">FAQ<a class="headerlink" href="#faq" title="Permanent link">&para;</a></h2>
+<h3 id="whats-the-difference-between-stirred-and-shaken">What's the difference between Stirred and Shaken?<a class="headerlink" href="#whats-the-difference-between-stirred-and-shaken" title="Permanent link">&para;</a></h3>
+<p>Stirred prioritises smoothness and gradual transitions between similar songs and clusters.\
+Shaken maximises contrast, jumping between distant songs and clusters to create surprise and greater entropy.</p>
+<p>Both modes use the same underlying audio features but apply different traversal techniques.</p>
+<h3 id="why-dont-transitions-involve-actual-audio-crossfades-or-beat-matching">Why don't transitions involve actual audio crossfades or beat matching?<a class="headerlink" href="#why-dont-transitions-involve-actual-audio-crossfades-or-beat-matching" title="Permanent link">&para;</a></h3>
+<p>That was actually the original concept for Bartender. Unfortunately, Spotify's Web API doesn't allow access to the raw audio or playback buffers. Bartender only operates at the playlist sequencing level, not the audio processing level.</p>
+<h3 id="can-songs-repeat-or-be-skipped">Can songs repeat or be skipped?<a class="headerlink" href="#can-songs-repeat-or-be-skipped" title="Permanent link">&para;</a></h3>
+<p>The transition engine tracks which songs have already been used to avoid duplicates. If missing songs occur, it's usually because the Reccobeat API cannot recognise the Spotify song, and is thus unable to fetch its audio features for the clustering.</p>
+<h3 id="why-use-k-means-clustering">Why use K-Means clustering?<a class="headerlink" href="#why-use-k-means-clustering" title="Permanent link">&para;</a></h3>
+<p>K-Means is fast, interpretable and works well for low-dimensional numeric feature spaces like Spotify audio features. Also, since playlist sizes are relatively small (approx 200?), the time complexity of K-Means is pretty effificient.</p>
+<h3 id="is-this-meant-to-be-a-real-dj-replacement">Is this meant to be a real DJ replacement?<a class="headerlink" href="#is-this-meant-to-be-a-real-dj-replacement" title="Permanent link">&para;</a></h3>
+<p>Nope, it's more of an algorithmic mixtape, cocktail if you will.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.instant", "navigation.sections", "navigation.expand", "content.code.copy"], "search": "../assets/javascripts/workers/search.7a47a382.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.e71a0d61.min.js"></script>
+      
+    
+  </body>
+</html>
